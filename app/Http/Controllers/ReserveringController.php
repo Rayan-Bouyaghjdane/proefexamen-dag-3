@@ -13,7 +13,8 @@ class ReserveringController extends Controller
     public function index()
     {
         return view('reservering.index', [
-            'reservering' => Reservering::with('persoons')->get(),
+            'reserverings' => Reservering::with(['Openingstijd', 'persoon', 'PakketOptie'])->get(),
+            // 'reservering' => Reservering::all(),
         ]);
     }
 

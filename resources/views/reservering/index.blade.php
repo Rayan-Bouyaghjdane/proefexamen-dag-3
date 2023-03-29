@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($reservering as $reservering)
+            @foreach ($reserverings as $reservering)
                 <tr>
                     <td>{{ $reservering->persoons->Voornaam }}</td>
                     <td>{{ $reservering->persoons->Tussenvoegsel }}</td>
@@ -33,7 +33,7 @@
                     <td>{{ $reservering->AantalKinderen }}</td>
                     <td>{{ $reservering->Optiepakket }}</td>
                     <td>
-                        <a href="{{ route('reservering.update', $reservering->id) }}">Edit</a>
+                        <a href="{{ route('reservering.update', $reservering->Id) }}">Edit</a>
                     </td>
                 </tr>
             @endforeach
