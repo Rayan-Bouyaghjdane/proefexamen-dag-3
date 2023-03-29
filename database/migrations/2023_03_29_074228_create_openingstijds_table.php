@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('openingstijds', function (Blueprint $table) {
             $table->id();
             $table->string('DagNaam');
-            $table->time('BeginTijd');
-            $table->time('EindTijd');
+            $table->date('BeginTijd');
+            $table->date('EindTijd');
             $table->boolean('IsActief');
             $table->string('Opmerking')->nullable();
             $table->timestamps();

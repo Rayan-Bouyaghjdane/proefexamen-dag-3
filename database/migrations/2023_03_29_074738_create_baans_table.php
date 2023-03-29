@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('baans', function (Blueprint $table) {
             $table->id();
             $table->integer('Nummer');
-            $table->integer('HeeftHek');
+            $table->tinyInteger('HeeftHek');
             $table->boolean('IsActief');
             $table->string('Opmerking')->nullable();
             $table->timestamps();

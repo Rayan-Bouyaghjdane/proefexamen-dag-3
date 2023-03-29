@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('ReserveringStatusId')->constrained('reservering_statuses')->onDelete('cascade');
             $table->integer('Reserveringsnummer');
             $table->date('Datum');
-            $table->tinyInteger('AantalUren');
+            $table->integer('AantalUren');
             $table->time('BeginTijd');
             $table->time('EindTijd');
             $table->integer('AantalVolwassenen');
