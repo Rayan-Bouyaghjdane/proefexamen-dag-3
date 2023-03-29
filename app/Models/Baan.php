@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Baan extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'Nummer',
+        'HeeftHek',
+        'IsActief',
+        'Opmerking',
+    ];
+
+    public function reserveringen()
+    {
+        return $this->hasMany(Reservering::class);
+    }
 }

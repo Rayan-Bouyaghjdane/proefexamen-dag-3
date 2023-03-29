@@ -8,4 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 class Reservering extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'PersoonId',
+        'OpeningstijdId',
+        'TariefId',
+        'BaanId',
+        'PakketOptieId',
+        'ReserveringStatusId',
+        'Reserveringsnummer',
+        'Datum',
+        'AantalUren',
+        'BeginTijd',
+        'EindTijd',
+        'AantalVolwassenen',
+        'AantalKinderen',
+        'IsActief',
+        'Opmerking',
+    ];
+
+    public function persoon()
+    {
+        return $this->belongsTo(Persoon::class);
+    }
 }

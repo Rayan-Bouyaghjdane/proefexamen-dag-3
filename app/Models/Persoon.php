@@ -8,4 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Persoon extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'TypePersoonId',
+        'Voornaam',
+        'Tussenvoegsel',
+        'Achternaam',
+        'Roepnaam',
+        'IsVolwassen',
+        'IsActief',
+        'Opmerking',
+    ];
+
+    public function reserveringen()
+    {
+        return $this->hasMany(Reservering::class);
+    }
 }
