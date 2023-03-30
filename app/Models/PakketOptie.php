@@ -17,6 +17,6 @@ class PakketOptie extends Model
 
     public function reserveringen()
     {
-        return $this->hasMany(Reservering::class);
+        return $this->hasMany(Reservering::class, 'PakketOptieId');
     }
 }

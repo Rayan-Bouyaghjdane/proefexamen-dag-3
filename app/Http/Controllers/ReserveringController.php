@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Persoon;
+use App\Models\PakketOptie;
 use App\Models\Reservering;
 use Illuminate\Http\Request;
 
@@ -12,8 +14,10 @@ class ReserveringController extends Controller
      */
     public function index()
     {
+        // dd persoon
+        // dd(Persoon::with('reserveringen')->get());
         return view('reservering.index', [
-            'reserverings' => Reservering::with(['Openingstijd', 'persoon', 'PakketOptie'])->get(),
+            'reserverings' => Reservering::with(['persoon', 'PakketOptie'])->get(),
             // 'reservering' => Reservering::all(),
         ]);
     }

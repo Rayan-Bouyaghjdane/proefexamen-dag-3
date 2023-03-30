@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('persoons', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('TypePersoonId')->constrained('type_persoons')->onDelete('cascade');
             $table->string('Voornaam');
             $table->string('Tussenvoegsel')->nullable();

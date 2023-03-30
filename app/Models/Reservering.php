@@ -29,6 +29,11 @@ class Reservering extends Model
 
     public function persoon()
     {
-        return $this->belongsTo(Persoon::class);
+        return $this->belongsTo(Persoon::class, 'PersoonId');
+    }
+
+    public function pakketOptie()
+    {
+        return $this->belongsTo(PakketOptie::class, 'PakketOptieId');
     }
 }
