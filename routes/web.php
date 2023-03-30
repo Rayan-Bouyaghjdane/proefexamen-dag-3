@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::resource('reservering', App\Http\Controllers\ReserveringController::class);
+
+Route::get('/overzicht', App\Http\Controllers\ReserveringController::class . '@overzicht');

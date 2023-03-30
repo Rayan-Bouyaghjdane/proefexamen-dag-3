@@ -15,33 +15,40 @@
         </div>
     @endif
 
+    <h1>Overzicht Reserveringen</h1>
+
+    <form action="" method="POST">
+        @csrf
+        @method('POST')
+        <label for="datum">Datum:</label>
+        <input type="date" name="datum">
+        <input type="submit" value="Tonen">
+    </form>
+
     <table>
         <thead>
             <tr>
                 <th>Voornaam</th>
                 <th>Tussenvoegsel</th>
                 <th>Achternaam</th>
-                <th>Datum</th>
+                <th>Reserveringsdatum</th>
+                <th>Uren</th>
                 <th>Volwassenen</th>
                 <th>Kinderen</th>
-                <th>Optiepakket</th>
-                <th></th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            <h1>Overzicht Reserveringen</h1>
-            @foreach ($reserverings as $reservering)
+            @foreach ($reserveringen as $reservering)
                 <tr>
-                    <td>{{ $reservering->persoon->Voornaam }}</td>
-                    <td>{{ $reservering->persoon->Tussenvoegsel }}</td>
-                    <td>{{ $reservering->persoon->Achternaam }}</td>
+                    <td>{{ $reservering->Persoon->Voornaam }}</td>
+                    <td>{{ $reservering->Persoon->Tussenvoegsel }}</td>
+                    <td>{{ $reservering->Persoon->Achternaam }}</td>
                     <td>{{ $reservering->Datum }}</td>
+                    <td>{{ $reservering->AantalUren }}</td>
                     <td>{{ $reservering->AantalVolwassenen }}</td>
                     <td>{{ $reservering->AantalKinderen }}</td>
-                    <td>{{ $reservering->pakketOptie->Naam }}</td>
-                    <td>
-                        <a href="{{ route('reservering.edit', $reservering->id) }}">Edit</a>
-                    </td>
+                    <td>{{ $reservering->ReserveringStatus->Status }}</td>
                 </tr>
             @endforeach
         </tbody>

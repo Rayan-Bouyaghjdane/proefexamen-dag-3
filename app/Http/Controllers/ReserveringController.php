@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Persoon;
 use App\Models\PakketOptie;
 use App\Models\Reservering;
+use App\Models\ReserveringStatus;
 use Illuminate\Http\Request;
 
 class ReserveringController extends Controller
@@ -47,10 +48,12 @@ class ReserveringController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Reservering $reservering)
+    public function edit($reservering)
     {
-        $reservering = Reservering::all();
-        return view('reservering.update', compact('reservering'));
+        // dd($reservering);
+        $reservering = Reservering::where('id', $reservering)->with(['PakketOptie'])->first();
+        $PakketOpties = PakketOptie::all();
+        return view('reservering.update', compact('reservering', 'PakketOpties'));
     }
 
     /**
@@ -58,28 +61,22 @@ class ReserveringController extends Controller
      */
     public function update(Request $request, Reservering $reservering)
     {
+
+        if ($reservering->AantalKinderen > 0 && $request->PakketOptieId == "4") {
+            return redirect()->route('reservering.edit', $reservering->id)
+                ->with('error', 'Get optiepakket vrijgezellen feest is niet bedoelt voor kinderen');
+        }
+
         $request->validate([
-            'PersoonId' => 'required',
-            'OpeningstijdId' => 'required',
-            'TariefId' => 'required',
-            'BaanId' => 'required',
             'PakketOptieId' => 'required',
-            'ReserveringStatusId' => 'required',
-            'Reserveringsnummer' => 'required',
-            'Datum' => 'required',
-            'AantalUren' => 'required',
-            'BeginTijd' => 'required',
-            'EindTijd' => 'required',
-            'AantalVolwassenen' => 'required',
-            'AantalKinderen' => 'required',
-            'IsActief' => 'required',
-            'Opmerking' => 'nullable',
         ]);
 
-        $reservering->update($request->all());
+        $reservering->update([
+            'PakketOptieId' => $request->PakketOptieId,
+        ]);
 
         return redirect()->route('reservering.index')
-            ->with('success', 'Reservering updated successfully');
+            ->with('success', 'PakketOptie is updated successfully');
     }
 
     /**
@@ -88,5 +85,14 @@ class ReserveringController extends Controller
     public function destroy(Reservering $reservering)
     {
         //
+    }
+
+    public function overzicht()
+    {
+        $reserveringen = Reservering::with(['persoon', 'ReserveringStatus'])->get()->sortByDesc('datum');
+
+        return view('reservering.overzicht', [
+            'reserveringen' => $reserveringen,
+        ]);
     }
 }

@@ -5,18 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Update</title>
 </head>
 
 <body>
-    <form action="{{ route('reservering.update', ['reservering' => $reservering->id]) }}" method="post">
+    {{-- @dd($PakketOpties) --}}
+    <h1>Details optiepakket</h1>
+
+    @if (\Session::has('error'))
+        <div class="alert alert-error">
+            <p>{{ \Session::get('error') }}</p>
+        </div>
+    @endif
+
+    <form action="{{ route('reservering.update', ['reservering' => $reservering->id]) }}" method="POST">
         @method('PUT')
         @csrf
-        <select name="Optiepakket" id="">
+        <select name="PakketOptieId" id="">
             <option value="">Selecteer een Optiepakket</option>
-            @foreach ($reservering as $reservering)
-                <option @if (old('instructeur', $rijschool->instructeur_id) == $instructeur->id) selected @endif value="{{ $instructeur->id }}">
-                    {{ $instructeur->name }}</option>
+            @foreach ($PakketOpties as $PakketOptie)
+                <option value="{{ $PakketOptie->id }}" @if ($PakketOptie->id == $reservering->PakketOptieId) selected @endif>
+                    {{ $PakketOptie->Naam }}
+                </option>
             @endforeach
         </select>
         <input type="submit" value="Submit">

@@ -36,4 +36,9 @@ class Reservering extends Model
     {
         return $this->belongsTo(PakketOptie::class, 'PakketOptieId');
     }
+
+    public function reserveringStatus()
+    {
+        return $this->belongsTo(ReserveringStatus::class, 'ReserveringStatusId');
+    }
 }
