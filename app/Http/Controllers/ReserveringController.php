@@ -14,8 +14,6 @@ class ReserveringController extends Controller
      */
     public function index()
     {
-        // dd persoon
-        // dd(Persoon::with('reserveringen')->get());
         return view('reservering.index', [
             'reserverings' => Reservering::with(['persoon', 'PakketOptie'])->get(),
             // 'reservering' => Reservering::all(),

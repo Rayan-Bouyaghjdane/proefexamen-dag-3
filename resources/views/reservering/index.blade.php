@@ -23,18 +23,18 @@
             </tr>
         </thead>
         <tbody>
-
+            <h1>Overzicht Reserveringen</h1>
             @foreach ($reserverings as $reservering)
                 <tr>
-                    <td>{{ $reservering->persoons->Voornaam }}</td>
-                    <td>{{ $reservering->persoons->Tussenvoegsel }}</td>
-                    <td>{{ $reservering->persoons->Achternaam }}</td>
+                    <td>{{ $reservering->persoon->Voornaam }}</td>
+                    <td>{{ $reservering->persoon->Tussenvoegsel }}</td>
+                    <td>{{ $reservering->persoon->Achternaam }}</td>
                     <td>{{ $reservering->Datum }}</td>
                     <td>{{ $reservering->AantalVolwassenen }}</td>
                     <td>{{ $reservering->AantalKinderen }}</td>
-                    <td>{{ $reservering->pakketOptie->reserveringen }}</td>
+                    <td>{{ $reservering->pakketOptie->Naam }}</td>
                     <td>
-                        <a href="{{ route('reservering.update', $reservering->Id) }}">Edit</a>
+                        <a href="{{ route('reservering.update', $reservering->id) }}">Edit</a>
                     </td>
                 </tr>
             @endforeach
